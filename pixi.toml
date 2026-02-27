@@ -1,0 +1,92 @@
+[workspace]
+name = "arrow-integer-unpacking"
+version = "0.0.1"
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64"]
+
+[environments]
+dev = { features = ["build", "dev", "lib"], solve-group = "default" }
+lsp = { features = ["clang-tools", "lsp", "lib"], solve-group = "default" }
+jupyter = { features = ["jupyter", "lib"] }
+
+[feature.build.dependencies]
+cxx-compiler = "*"
+cmake = ">=3.16"
+ninja = "*"
+
+[feature.lib.dependencies]
+xsimd = "14.*"
+
+[feature.dev.dependencies]
+sccache = "*"
+gtest = "*"
+benchmark = "*"
+cmake-format = "*"
+
+[feature.dev.tasks.configure]
+cmd = """
+cmake -B build/ -G Ninja \
+  -D CMAKE_COLOR_DIAGNOSTICS=ON \
+  -D CMAKE_C_COMPILER_LAUNCHER="sccache" \
+  -D CMAKE_CXX_COMPILER_LAUNCHER=sccache \
+  -D CMAKE_EXPORT_COMPILE_COMMANDS=ON \
+"""
+inputs=["**/CMake*.*", "**/*.cmake", "**/*.cmake.in"]
+outputs=["build/CMakeCache.txt"]
+
+[feature.dev.tasks.compile-commands]
+cmd = "ln -sf build/compile_commands.json"
+depends-on=["configure"]
+outputs=["compile_commands.json"]
+
+[feature.dev.tasks.build]
+cmd = "cmake --build build/ --parallel"
+depends-on=["configure"]
+
+[feature.dev.tasks.test]
+cmd = "build/bpacking_test"
+depends-on=["build"]
+
+[feature.dev.tasks.bench]
+cmd = "build/bpacking_benchmark"
+depends-on=["build"]
+
+[feature.clang-tools.dependencies]
+clang = "19.*"
+clangxx = "19.*"
+clang-tools = "19.*"
+lld = "*"
+
+[feature.clang-tools.tasks.fmt-clang]
+cmd = """
+git ls-files | grep -E '\\.(cpp|h|c|cc|hpp)$' | xargs clang-format -i
+"""
+inputs=["**/*.*pp", "**/*.h", "**/*.cc"]
+outputs=["**/*.*pp", "**/*.h", "**/*.cc"]
+
+[feature.lsp.dependencies]
+typos-lsp = "*"
+neocmakelsp = "*"
+
+[feature.jupyter.activation.env]
+LD_LIBRARY_PATH="$CONDA_PREFIX/lib"
+LIBRARY_PATH="$CONDA_PREFIX/lib"
+
+[feature.jupyter.dependencies]
+jupyterlab = ">=4.5"
+specta = "*"
+# Kernel
+xeus-cpp = ">=0.8"
+cppinterop = "<1.8.0"
+# LSP
+jupyterlab-lsp = "*"
+clang = "*"
+clangxx = "*"
+clang-tools = "*"
+# Libs
+xwidgets = "*"
+jupyterlab_widgets = "*"
+fmt = "*"
+polars = "*"
+seaborn = "*"
+pyarrow = "*"

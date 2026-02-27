@@ -1,0 +1,9 @@
+name: default-environment
+channels:
+  - emscripten-forge
+  - conda-forge
+dependencies:
+  - xeus-cpp >=0.8
+  - xsimd =14.*
+  - xwidgets
+  - jupyterlab_widgets
