@@ -228,6 +228,22 @@ BENCHMARK_CAPTURE(BM_UnpackUint32, Sse42NewNoDispatch,
 BENCHMARK_CAPTURE(BM_UnpackUint64, Sse42NewNoDispatch,
                   &bpacking::unpack_sse4_2_no_dispatch<uint64_t>)
     ->ArgsProduct(kBitWidthsNumValues64);
+
+BENCHMARK_CAPTURE(BM_UnpackBool, Sse42LittleIntPacker,
+                  &bpacking::unpack_sse4_2_littleintpacker<bool>)
+    ->ArgsProduct(kBitWidthsNumValuesBool);
+BENCHMARK_CAPTURE(BM_UnpackUint8, Sse42LittleIntPacker,
+                  &bpacking::unpack_sse4_2_littleintpacker<uint8_t>)
+    ->ArgsProduct(kBitWidthsNumValues8);
+BENCHMARK_CAPTURE(BM_UnpackUint16, Sse42LittleIntPacker,
+                  &bpacking::unpack_sse4_2_littleintpacker<uint16_t>)
+    ->ArgsProduct(kBitWidthsNumValues16);
+BENCHMARK_CAPTURE(BM_UnpackUint32, Sse42LittleIntPacker,
+                  &bpacking::unpack_sse4_2_littleintpacker<uint32_t>)
+    ->ArgsProduct(kBitWidthsNumValues32);
+BENCHMARK_CAPTURE(BM_UnpackUint64, Sse42LittleIntPacker,
+                  &bpacking::unpack_sse4_2_littleintpacker<uint64_t>)
+    ->ArgsProduct(kBitWidthsNumValues64);
 #endif
 
 #if defined(ARROW_HAVE_RUNTIME_AVX2)

@@ -216,6 +216,25 @@ extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_no_dispatch<uint32_t>(
 extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_no_dispatch<uint64_t>(
     const uint8_t* in, uint64_t* out, const UnpackOptions& opts);
 
+template <typename Uint>
+ARROW_EXPORT void unpack_sse4_2_littleintpacker(const uint8_t* in, Uint* out,
+                                                const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_littleintpacker<bool>(
+    const uint8_t* in, bool* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_littleintpacker<uint8_t>(
+    const uint8_t* in, uint8_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_littleintpacker<uint16_t>(
+    const uint8_t* in, uint16_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_littleintpacker<uint32_t>(
+    const uint8_t* in, uint32_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_littleintpacker<uint64_t>(
+    const uint8_t* in, uint64_t* out, const UnpackOptions& opts);
+
 #endif
 
 #if defined(ARROW_HAVE_AVX2) || defined(ARROW_HAVE_RUNTIME_AVX2)

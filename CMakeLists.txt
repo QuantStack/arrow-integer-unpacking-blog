@@ -21,6 +21,9 @@ set(ARROW_SIMD_DEFAULT_SOURCES
     arrow/util/bpacking_simd_default_scalar_batch.cc
     arrow/util/bpacking_simd_default_exact.cc
 )
+set(ARROW_SSE42_SOURCES
+    arrow/util/bpacking_littleintpacker_sse42.cc
+)
 set(ARROW_SIMD_AVX2_SOURCES
     arrow/util/bpacking_simd_avx2.cc
     arrow/util/bpacking_simd_avx2_no_dispatch.cc
@@ -40,9 +43,11 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64")
     if(COMPILER_SUPPORTS_SSE4_2)
         list(APPEND ARROW_COMPILE_DEFINITIONS ARROW_HAVE_SSE4_2)
         list(APPEND ARROW_SIMD_SOURCES ${ARROW_SIMD_DEFAULT_SOURCES})
+        list(APPEND ARROW_SIMD_SOURCES ${ARROW_SSE42_SOURCES})
         # Explicitly disable AVX2/AVX512 so these TUs only use SSE4.2 intrinsics
         set_source_files_properties(
             ${ARROW_SIMD_DEFAULT_SOURCES}
+            ${ARROW_SSE42_SOURCES}
             PROPERTIES COMPILE_FLAGS "-msse4.2 -mno-avx2 -mno-avx512f"
         )
     endif()

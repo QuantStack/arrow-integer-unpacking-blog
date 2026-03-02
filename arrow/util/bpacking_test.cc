@@ -348,6 +348,21 @@ TEST_P(TestUnpack, Unpack32Sse4_2NoDispatch) {
 TEST_P(TestUnpack, Unpack64Sse4_2NoDispatch) {
   this->TestAll(&bpacking::unpack_sse4_2_no_dispatch<uint64_t>);
 }
+TEST_P(TestUnpack, UnpackBoolSse4_2LittleIntPacker) {
+  this->TestAll(&bpacking::unpack_sse4_2_littleintpacker<bool>);
+}
+TEST_P(TestUnpack, Unpack8Sse4_2LittleIntPacker) {
+  this->TestAll(&bpacking::unpack_sse4_2_littleintpacker<uint8_t>);
+}
+TEST_P(TestUnpack, Unpack16Sse4_2LittleIntPacker) {
+  this->TestAll(&bpacking::unpack_sse4_2_littleintpacker<uint16_t>);
+}
+TEST_P(TestUnpack, Unpack32Sse4_2LittleIntPacker) {
+  this->TestAll(&bpacking::unpack_sse4_2_littleintpacker<uint32_t>);
+}
+TEST_P(TestUnpack, Unpack64Sse4_2LittleIntPacker) {
+  this->TestAll(&bpacking::unpack_sse4_2_littleintpacker<uint64_t>);
+}
 #endif
 
 #if defined(ARROW_HAVE_RUNTIME_AVX2)
