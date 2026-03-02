@@ -88,11 +88,11 @@ void BM_Unpack(benchmark::State& state, UnpackFunc<Int> unpack, bool skip,
 // Currently, the minimum unpack SIMD kernel size is 32 and the RLE-bit-packing encoder
 // will not emit runs larger than 512 (though other implementation might), so we biased
 // the benchmarks towards a rather small scale.
-static const auto kNumValuesRange = benchmark::CreateRange(32, 512, 2);
-constexpr std::initializer_list<int64_t> kBitWidths8 = {1, 2, 8};
-constexpr std::initializer_list<int64_t> kBitWidths16 = {1, 2, 8, 13};
-constexpr std::initializer_list<int64_t> kBitWidths32 = {1, 2, 8, 20};
-constexpr std::initializer_list<int64_t> kBitWidths64 = {1, 2, 8, 20, 47};
+static const auto kNumValuesRange = benchmark::CreateRange(32, 16384, 2);
+static const auto kBitWidths8 = benchmark::CreateDenseRange(0, 8, 1);
+static const auto kBitWidths16 = benchmark::CreateDenseRange(0, 16, 1);
+static const auto kBitWidths32 = benchmark::CreateDenseRange(0, 32, 1);
+static const auto kBitWidths64 = benchmark::CreateDenseRange(0, 64, 1);
 
 static const std::vector<std::vector<int64_t>> kBitWidthsNumValuesBool = {
     {0, 1},
