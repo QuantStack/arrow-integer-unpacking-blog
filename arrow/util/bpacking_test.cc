@@ -333,6 +333,21 @@ TEST_P(TestUnpack, Unpack32Sse4_2Exact) {
 TEST_P(TestUnpack, Unpack64Sse4_2Exact) {
   this->TestAll(&bpacking::unpack_sse4_2_exact<uint64_t>);
 }
+TEST_P(TestUnpack, UnpackBoolSse4_2NoDispatch) {
+  this->TestAll(&bpacking::unpack_sse4_2_no_dispatch<bool>);
+}
+TEST_P(TestUnpack, Unpack8Sse4_2NoDispatch) {
+  this->TestAll(&bpacking::unpack_sse4_2_no_dispatch<uint8_t>);
+}
+TEST_P(TestUnpack, Unpack16Sse4_2NoDispatch) {
+  this->TestAll(&bpacking::unpack_sse4_2_no_dispatch<uint16_t>);
+}
+TEST_P(TestUnpack, Unpack32Sse4_2NoDispatch) {
+  this->TestAll(&bpacking::unpack_sse4_2_no_dispatch<uint32_t>);
+}
+TEST_P(TestUnpack, Unpack64Sse4_2NoDispatch) {
+  this->TestAll(&bpacking::unpack_sse4_2_no_dispatch<uint64_t>);
+}
 #endif
 
 #if defined(ARROW_HAVE_RUNTIME_AVX2)
@@ -455,6 +470,36 @@ TEST_P(TestUnpack, Unpack64Avx2Exact) {
     GTEST_SKIP() << "Test requires AVX2";
   }
   this->TestAll(&bpacking::unpack_avx2_exact<uint64_t>);
+}
+TEST_P(TestUnpack, UnpackBoolAvx2NoDispatch) {
+  if (!CpuInfo::GetInstance()->IsSupported(CpuInfo::AVX2)) {
+    GTEST_SKIP() << "Test requires AVX2";
+  }
+  this->TestAll(&bpacking::unpack_avx2_no_dispatch<bool>);
+}
+TEST_P(TestUnpack, Unpack8Avx2NoDispatch) {
+  if (!CpuInfo::GetInstance()->IsSupported(CpuInfo::AVX2)) {
+    GTEST_SKIP() << "Test requires AVX2";
+  }
+  this->TestAll(&bpacking::unpack_avx2_no_dispatch<uint8_t>);
+}
+TEST_P(TestUnpack, Unpack16Avx2NoDispatch) {
+  if (!CpuInfo::GetInstance()->IsSupported(CpuInfo::AVX2)) {
+    GTEST_SKIP() << "Test requires AVX2";
+  }
+  this->TestAll(&bpacking::unpack_avx2_no_dispatch<uint16_t>);
+}
+TEST_P(TestUnpack, Unpack32Avx2NoDispatch) {
+  if (!CpuInfo::GetInstance()->IsSupported(CpuInfo::AVX2)) {
+    GTEST_SKIP() << "Test requires AVX2";
+  }
+  this->TestAll(&bpacking::unpack_avx2_no_dispatch<uint32_t>);
+}
+TEST_P(TestUnpack, Unpack64Avx2NoDispatch) {
+  if (!CpuInfo::GetInstance()->IsSupported(CpuInfo::AVX2)) {
+    GTEST_SKIP() << "Test requires AVX2";
+  }
+  this->TestAll(&bpacking::unpack_avx2_no_dispatch<uint64_t>);
 }
 #endif
 
@@ -597,6 +642,21 @@ TEST_P(TestUnpack, Unpack32NeonExact) {
 }
 TEST_P(TestUnpack, Unpack64NeonExact) {
   this->TestAll(&bpacking::unpack_neon_exact<uint64_t>);
+}
+TEST_P(TestUnpack, UnpackBoolNeonNoDispatch) {
+  this->TestAll(&bpacking::unpack_neon_no_dispatch<bool>);
+}
+TEST_P(TestUnpack, Unpack8NeonNoDispatch) {
+  this->TestAll(&bpacking::unpack_neon_no_dispatch<uint8_t>);
+}
+TEST_P(TestUnpack, Unpack16NeonNoDispatch) {
+  this->TestAll(&bpacking::unpack_neon_no_dispatch<uint16_t>);
+}
+TEST_P(TestUnpack, Unpack32NeonNoDispatch) {
+  this->TestAll(&bpacking::unpack_neon_no_dispatch<uint32_t>);
+}
+TEST_P(TestUnpack, Unpack64NeonNoDispatch) {
+  this->TestAll(&bpacking::unpack_neon_no_dispatch<uint64_t>);
 }
 #endif
 

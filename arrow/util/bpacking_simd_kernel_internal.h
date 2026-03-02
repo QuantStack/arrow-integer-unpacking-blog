@@ -1061,6 +1061,10 @@ struct CastingKernel : WorkingKernel {
  *  Kernel static dispatching  *
  *******************************/
 
+struct KernelDispatchOptions {
+  bool enable_dispatch = true;
+};
+
 // Benchmarking show unpack to uint64_t is underperforming on SSE4.2 and Avx2
 template <typename KerTraits, typename Arch = typename KerTraits::arch_type>
 constexpr bool kMediumShouldUseUint32 =
@@ -1075,11 +1079,11 @@ constexpr bool kLargeShouldUseUint16 =
     IsSse2<Arch> && (KerTraits::kShape.unpacked_byte_size() == sizeof(uint8_t));
 
 // A ``std::enable_if`` that works on MSVC
-template <typename KerTraits>
+template <typename KerTraits, KernelDispatchOptions kOpts>
 constexpr auto KernelDispatchImpl() {
   constexpr MediumKernelOptions kMedKernelOpts = {.unpacked_per_kernel_limit_ = 32};
   if constexpr (KerTraits::kShape.is_medium()) {
-    if constexpr (kMediumShouldUseUint32<KerTraits>) {
+    if constexpr (kOpts.enable_dispatch && kMediumShouldUseUint32<KerTraits>) {
       using Kernel32 =
           MediumKernel<KernelTraitsWithUnpackUint<KerTraits, uint32_t>, kMedKernelOpts>;
       return CastingKernel<KerTraits, Kernel32>{};
@@ -1087,7 +1091,7 @@ constexpr auto KernelDispatchImpl() {
       return MediumKernel<KerTraits, kMedKernelOpts>{};
     }
   } else if constexpr (KerTraits::kShape.is_large()) {
-    if constexpr (kLargeShouldUseUint16<KerTraits>) {
+    if constexpr (kOpts.enable_dispatch && kLargeShouldUseUint16<KerTraits>) {
       using Kernel16 =
           MediumKernel<KernelTraitsWithUnpackUint<KerTraits, uint16_t>, kMedKernelOpts>;
       return CastingKernel<KerTraits, Kernel16>{};
@@ -1099,12 +1103,13 @@ constexpr auto KernelDispatchImpl() {
   }
 }
 
-template <typename Traits>
-using KernelDispatch = decltype(KernelDispatchImpl<Traits>());
+template <typename Traits, KernelDispatchOptions kOpts>
+using KernelDispatch = decltype(KernelDispatchImpl<Traits, kOpts>());
 
 /// The public kernel exposed for any size.
-template <typename UnpackedUint, int kPackedBitSize, int kSimdBitSize>
-struct Kernel : KernelDispatch<KernelTraits<UnpackedUint, kPackedBitSize, kSimdBitSize>> {
-};
+template <typename UnpackedUint, int kPackedBitSize, int kSimdBitSize,
+          KernelDispatchOptions kOpts = {}>
+struct Kernel
+    : KernelDispatch<KernelTraits<UnpackedUint, kPackedBitSize, kSimdBitSize>, kOpts> {};
 
 }  // namespace arrow::internal::bpacking

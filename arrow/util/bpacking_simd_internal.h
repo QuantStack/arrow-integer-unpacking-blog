@@ -101,6 +101,25 @@ extern template ARROW_TEMPLATE_EXPORT void unpack_neon_exact<uint32_t>(
 extern template ARROW_TEMPLATE_EXPORT void unpack_neon_exact<uint64_t>(
     const uint8_t* in, uint64_t* out, const UnpackOptions& opts);
 
+template <typename Uint>
+ARROW_EXPORT void unpack_neon_no_dispatch(const uint8_t* in, Uint* out,
+                                          const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_neon_no_dispatch<bool>(
+    const uint8_t* in, bool* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_neon_no_dispatch<uint8_t>(
+    const uint8_t* in, uint8_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_neon_no_dispatch<uint16_t>(
+    const uint8_t* in, uint16_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_neon_no_dispatch<uint32_t>(
+    const uint8_t* in, uint32_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_neon_no_dispatch<uint64_t>(
+    const uint8_t* in, uint64_t* out, const UnpackOptions& opts);
+
 #elif defined(ARROW_HAVE_SSE4_2)
 
 template <typename Uint>
@@ -176,6 +195,25 @@ extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_exact<uint32_t>(
     const uint8_t* in, uint32_t* out, const UnpackOptions& opts);
 
 extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_exact<uint64_t>(
+    const uint8_t* in, uint64_t* out, const UnpackOptions& opts);
+
+template <typename Uint>
+ARROW_EXPORT void unpack_sse4_2_no_dispatch(const uint8_t* in, Uint* out,
+                                            const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_no_dispatch<bool>(
+    const uint8_t* in, bool* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_no_dispatch<uint8_t>(
+    const uint8_t* in, uint8_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_no_dispatch<uint16_t>(
+    const uint8_t* in, uint16_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_no_dispatch<uint32_t>(
+    const uint8_t* in, uint32_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_sse4_2_no_dispatch<uint64_t>(
     const uint8_t* in, uint64_t* out, const UnpackOptions& opts);
 
 #endif
@@ -255,6 +293,25 @@ extern template ARROW_TEMPLATE_EXPORT void unpack_avx2_exact<uint32_t>(
     const uint8_t* in, uint32_t* out, const UnpackOptions& opts);
 
 extern template ARROW_TEMPLATE_EXPORT void unpack_avx2_exact<uint64_t>(
+    const uint8_t* in, uint64_t* out, const UnpackOptions& opts);
+
+template <typename Uint>
+ARROW_EXPORT void unpack_avx2_no_dispatch(const uint8_t* in, Uint* out,
+                                          const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_avx2_no_dispatch<bool>(
+    const uint8_t* in, bool* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_avx2_no_dispatch<uint8_t>(
+    const uint8_t* in, uint8_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_avx2_no_dispatch<uint16_t>(
+    const uint8_t* in, uint16_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_avx2_no_dispatch<uint32_t>(
+    const uint8_t* in, uint32_t* out, const UnpackOptions& opts);
+
+extern template ARROW_TEMPLATE_EXPORT void unpack_avx2_no_dispatch<uint64_t>(
     const uint8_t* in, uint64_t* out, const UnpackOptions& opts);
 
 #endif

@@ -212,6 +212,22 @@ BENCHMARK_CAPTURE(BM_UnpackUint32, Sse42Exact, &bpacking::unpack_sse4_2_exact<ui
     ->ArgsProduct(kBitWidthsNumValues32);
 BENCHMARK_CAPTURE(BM_UnpackUint64, Sse42Exact, &bpacking::unpack_sse4_2_exact<uint64_t>)
     ->ArgsProduct(kBitWidthsNumValues64);
+
+BENCHMARK_CAPTURE(BM_UnpackBool, Sse42NewNoDispatch,
+                  &bpacking::unpack_sse4_2_no_dispatch<bool>)
+    ->ArgsProduct(kBitWidthsNumValuesBool);
+BENCHMARK_CAPTURE(BM_UnpackUint8, Sse42NewNoDispatch,
+                  &bpacking::unpack_sse4_2_no_dispatch<uint8_t>)
+    ->ArgsProduct(kBitWidthsNumValues8);
+BENCHMARK_CAPTURE(BM_UnpackUint16, Sse42NewNoDispatch,
+                  &bpacking::unpack_sse4_2_no_dispatch<uint16_t>)
+    ->ArgsProduct(kBitWidthsNumValues16);
+BENCHMARK_CAPTURE(BM_UnpackUint32, Sse42NewNoDispatch,
+                  &bpacking::unpack_sse4_2_no_dispatch<uint32_t>)
+    ->ArgsProduct(kBitWidthsNumValues32);
+BENCHMARK_CAPTURE(BM_UnpackUint64, Sse42NewNoDispatch,
+                  &bpacking::unpack_sse4_2_no_dispatch<uint64_t>)
+    ->ArgsProduct(kBitWidthsNumValues64);
 #endif
 
 #if defined(ARROW_HAVE_RUNTIME_AVX2)
@@ -300,6 +316,32 @@ BENCHMARK_CAPTURE(BM_UnpackUint32, Avx2Exact, &bpacking::unpack_avx2_exact<uint3
                   "Avx2 not available")
     ->ArgsProduct(kBitWidthsNumValues32);
 BENCHMARK_CAPTURE(BM_UnpackUint64, Avx2Exact, &bpacking::unpack_avx2_exact<uint64_t>,
+                  !CpuInfo::GetInstance()->IsSupported(CpuInfo::AVX2),
+                  "Avx2 not available")
+    ->ArgsProduct(kBitWidthsNumValues64);
+
+BENCHMARK_CAPTURE(BM_UnpackBool, Avx2NewNoDispatch,
+                  &bpacking::unpack_avx2_no_dispatch<bool>,
+                  !CpuInfo::GetInstance()->IsSupported(CpuInfo::AVX2),
+                  "Avx2 not available")
+    ->ArgsProduct(kBitWidthsNumValuesBool);
+BENCHMARK_CAPTURE(BM_UnpackUint8, Avx2NewNoDispatch,
+                  &bpacking::unpack_avx2_no_dispatch<uint8_t>,
+                  !CpuInfo::GetInstance()->IsSupported(CpuInfo::AVX2),
+                  "Avx2 not available")
+    ->ArgsProduct(kBitWidthsNumValues8);
+BENCHMARK_CAPTURE(BM_UnpackUint16, Avx2NewNoDispatch,
+                  &bpacking::unpack_avx2_no_dispatch<uint16_t>,
+                  !CpuInfo::GetInstance()->IsSupported(CpuInfo::AVX2),
+                  "Avx2 not available")
+    ->ArgsProduct(kBitWidthsNumValues16);
+BENCHMARK_CAPTURE(BM_UnpackUint32, Avx2NewNoDispatch,
+                  &bpacking::unpack_avx2_no_dispatch<uint32_t>,
+                  !CpuInfo::GetInstance()->IsSupported(CpuInfo::AVX2),
+                  "Avx2 not available")
+    ->ArgsProduct(kBitWidthsNumValues32);
+BENCHMARK_CAPTURE(BM_UnpackUint64, Avx2NewNoDispatch,
+                  &bpacking::unpack_avx2_no_dispatch<uint64_t>,
                   !CpuInfo::GetInstance()->IsSupported(CpuInfo::AVX2),
                   "Avx2 not available")
     ->ArgsProduct(kBitWidthsNumValues64);
@@ -423,6 +465,22 @@ BENCHMARK_CAPTURE(BM_UnpackUint16, NeonExact, &bpacking::unpack_neon_exact<uint1
 BENCHMARK_CAPTURE(BM_UnpackUint32, NeonExact, &bpacking::unpack_neon_exact<uint32_t>)
     ->ArgsProduct(kBitWidthsNumValues32);
 BENCHMARK_CAPTURE(BM_UnpackUint64, NeonExact, &bpacking::unpack_neon_exact<uint64_t>)
+    ->ArgsProduct(kBitWidthsNumValues64);
+
+BENCHMARK_CAPTURE(BM_UnpackBool, NeonNewNoDispatch,
+                  &bpacking::unpack_neon_no_dispatch<bool>)
+    ->ArgsProduct(kBitWidthsNumValuesBool);
+BENCHMARK_CAPTURE(BM_UnpackUint8, NeonNewNoDispatch,
+                  &bpacking::unpack_neon_no_dispatch<uint8_t>)
+    ->ArgsProduct(kBitWidthsNumValues8);
+BENCHMARK_CAPTURE(BM_UnpackUint16, NeonNewNoDispatch,
+                  &bpacking::unpack_neon_no_dispatch<uint16_t>)
+    ->ArgsProduct(kBitWidthsNumValues16);
+BENCHMARK_CAPTURE(BM_UnpackUint32, NeonNewNoDispatch,
+                  &bpacking::unpack_neon_no_dispatch<uint32_t>)
+    ->ArgsProduct(kBitWidthsNumValues32);
+BENCHMARK_CAPTURE(BM_UnpackUint64, NeonNewNoDispatch,
+                  &bpacking::unpack_neon_no_dispatch<uint64_t>)
     ->ArgsProduct(kBitWidthsNumValues64);
 #endif
 
