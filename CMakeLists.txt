@@ -38,6 +38,11 @@ set(ARROW_SIMD_AVX512_SOURCES
 )
 
 if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64")
+    # Explicitly disable simd to compare the NoSimd function
+    set_source_files_properties(
+        ${ARROW_NORMAL_SOURCES}
+        PROPERTIES COMPILE_FLAGS "-mno-sse"
+    )
 
     check_cxx_compiler_flag("-msse4.2" COMPILER_SUPPORTS_SSE4_2)
     if(COMPILER_SUPPORTS_SSE4_2)
@@ -74,6 +79,11 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64")
     endif()
 
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64")
+    # Explicitly disable simd to compare the NoSimd function
+    set_source_files_properties(
+        ${ARROW_NORMAL_SOURCES}
+        PROPERTIES COMPILE_FLAGS "-march=armv8-a+nosimd"
+    )
 
     list(APPEND ARROW_COMPILE_DEFINITIONS ARROW_HAVE_NEON)
     list(APPEND ARROW_SIMD_SOURCES ${ARROW_SIMD_DEFAULT_SOURCES})

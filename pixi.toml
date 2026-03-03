@@ -50,11 +50,12 @@ depends-on=["build"]
 [feature.dev.tasks.bench]
 cmd = """
   build/bpacking_benchmark
-    --benchmark_min_time=1000000x
+    --benchmark_min_time=0.5s
+    --benchmark_min_warmup_time=0.5
     --benchmark_repetitions=3
     --benchmark_time_unit=ns
     --benchmark_out_format=csv
-    --benchmark_out=benchmark.csv
+    --benchmark_out=benchmark-{{ pixi.platform }}.csv
 """
 depends-on=["build"]
 
