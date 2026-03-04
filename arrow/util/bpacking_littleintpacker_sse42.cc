@@ -153,25 +153,17 @@ struct LipCastKernel {
 template <typename UnpackedUint, int kPackedBitSize>
 constexpr auto LipKernelDispatchImpl() {
   if constexpr (std::is_same_v<UnpackedUint, bool>) {
-    if constexpr (kPackedBitSize == 1) {
-      return LipCastKernel<bool, 1>{};
-    } else {
-      return LipNoOpKernel<bool, kPackedBitSize>{};
-    }
+    return LipCastKernel<bool, 1>{};
   } else if constexpr (sizeof(UnpackedUint) < sizeof(uint64_t)) {
     // uint8_t, uint16_t, uint32_t
-    constexpr int kMaxBits = 8 * static_cast<int>(sizeof(UnpackedUint));
-    if constexpr (kPackedBitSize >= 1 && kPackedBitSize < kMaxBits) {
-      if constexpr (std::is_same_v<UnpackedUint, uint32_t>) {
-        return LipUint32Kernel<kPackedBitSize>{};
-      } else {
-        return LipCastKernel<UnpackedUint, kPackedBitSize>{};
-      }
+    if constexpr (std::is_same_v<UnpackedUint, uint32_t>) {
+      return LipUint32Kernel<kPackedBitSize>{};
     } else {
-      return LipNoOpKernel<UnpackedUint, kPackedBitSize>{};
+      return LipCastKernel<UnpackedUint, kPackedBitSize>{};
     }
   } else {
-    // uint64_t: packed values fit in uint32_t for bit sizes 1-32, so cast via uint32_t kernel
+    // uint64_t: packed values fit in uint32_t for bit sizes 1-32, so cast via uint32_t
+    // kernel
     if constexpr (kPackedBitSize >= 1 && kPackedBitSize <= 32) {
       return LipCastKernel<uint64_t, kPackedBitSize>{};
     } else {
