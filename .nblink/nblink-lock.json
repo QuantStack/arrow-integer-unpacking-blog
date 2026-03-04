@@ -1,0 +1,191 @@
+{
+  "lockVersion": "1.0.3",
+  "platform": "emscripten-wasm32",
+  "specs": [
+    "xeus-cpp >=0.8",
+    "xsimd =14.*",
+    "xwidgets=0.29.3",
+    "xproperty=0.12.1",
+    "jupyterlab_widgets"
+  ],
+  "channels": [
+    "emscripten-forge-4x",
+    "conda-forge"
+  ],
+  "channelInfo": {
+    "emscripten-forge-4x": [
+      {
+        "url": "https://prefix.dev/emscripten-forge-4x",
+        "protocol": "https"
+      },
+      {
+        "url": "https://repo.prefix.dev/emscripten-forge-4x",
+        "protocol": "https"
+      }
+    ],
+    "conda-forge": [
+      {
+        "url": "https://prefix.dev/conda-forge",
+        "protocol": "https"
+      },
+      {
+        "url": "https://repo.prefix.dev/conda-forge",
+        "protocol": "https"
+      }
+    ]
+  },
+  "packages": {
+    "xproperty-0.12.1-h0b0027f_0.tar.bz2": {
+      "name": "xproperty",
+      "build": "h0b0027f_0",
+      "version": "0.12.1",
+      "subdir": "emscripten-wasm32",
+      "channel": "emscripten-forge-4x",
+      "hash": {
+        "sha256": "a7ceacd82b8b976f1418848c4e4194ba5fe81cc3eaf82a61d6182150f40bdc20"
+      },
+      "size": 14953
+    },
+    "xwidgets-0.29.3-h0b0027f_0.tar.bz2": {
+      "name": "xwidgets",
+      "build": "h0b0027f_0",
+      "version": "0.29.3",
+      "subdir": "emscripten-wasm32",
+      "channel": "emscripten-forge-4x",
+      "hash": {
+        "sha256": "162100fdbfb1cff129fe27e5db9874e96c7305808cb7bb1ddb2ab753db317a42"
+      },
+      "size": 2176968
+    },
+    "xsimd-14.0.0-py313h313682a_0.tar.bz2": {
+      "name": "xsimd",
+      "build": "py313h313682a_0",
+      "version": "14.0.0",
+      "subdir": "emscripten-wasm32",
+      "channel": "emscripten-forge-4x",
+      "hash": {
+        "sha256": "75c9e44f1e7b3fca4411db2ef83534b99c1b4dd7b8f90abefc97704e85906e9a"
+      },
+      "size": 1009056
+    },
+    "nlohmann_json-3.12.0-h0b0027f_0.tar.bz2": {
+      "name": "nlohmann_json",
+      "build": "h0b0027f_0",
+      "version": "3.12.0",
+      "subdir": "emscripten-wasm32",
+      "channel": "emscripten-forge-4x",
+      "hash": {
+        "sha256": "a616da847fc88fdcf6abbe208583f9f28d72d4628c33d47ea4a07c84a22de524"
+      },
+      "size": 123248
+    },
+    "xeus-cpp-0.8.1-h0b0027f_0.tar.bz2": {
+      "name": "xeus-cpp",
+      "build": "h0b0027f_0",
+      "version": "0.8.1",
+      "subdir": "emscripten-wasm32",
+      "channel": "emscripten-forge-4x",
+      "hash": {
+        "md5": "6a72221b319e625b02df8d572a7c2e4c",
+        "sha256": "11368db7b5b392758c9670de292ed03992e5cb492784c4a77c74df4ac6b30abb"
+      },
+      "size": 3235787
+    },
+    "jupyterlab_widgets-3.0.16-pyhcf101f3_1.conda": {
+      "name": "jupyterlab_widgets",
+      "build": "pyhcf101f3_1",
+      "version": "3.0.16",
+      "subdir": "noarch",
+      "channel": "conda-forge",
+      "hash": {
+        "md5": "dbf8b81974504fa51d34e436ca7ef389",
+        "sha256": "5c03de243d7ae6247f39a402f4785d95e61c3be79ef18738e8f17155585d31a8"
+      },
+      "size": 216779
+    },
+    "cppinterop-1.7.0-h0b0027f_1.tar.bz2": {
+      "name": "cppinterop",
+      "build": "h0b0027f_1",
+      "version": "1.7.0",
+      "subdir": "emscripten-wasm32",
+      "channel": "emscripten-forge-4x",
+      "hash": {
+        "sha256": "0712d0b3011e65e506d8d9475786ddb36c52cdbfc6351f9a3023178ab250017d"
+      },
+      "size": 17719329
+    },
+    "clang-resource-headers-20.1.8-hc286ada_1.tar.bz2": {
+      "name": "clang-resource-headers",
+      "build": "hc286ada_1",
+      "version": "20.1.8",
+      "subdir": "emscripten-wasm32",
+      "channel": "emscripten-forge-4x",
+      "hash": {
+        "sha256": "db7e74cfcb09fcf1778237ee6504d7ef64a3d865083ba79f6f11ce5943b9a677"
+      },
+      "size": 488192
+    },
+    "emscripten-abi-4.0.9-h267e887_8.tar.bz2": {
+      "name": "emscripten-abi",
+      "build": "h267e887_8",
+      "version": "4.0.9",
+      "subdir": "noarch",
+      "channel": "emscripten-forge-4x",
+      "hash": {
+        "md5": "744cafd9d23d91fc2943a29fdbb4c6a6",
+        "sha256": "98cfd70341371eccfd6e186e3be1b18b2ac1cb859ecb9efb9a96303885a6bb2a"
+      },
+      "size": 13081
+    },
+    "nlohmann_json-abi-3.12.0-h0f90c79_1.conda": {
+      "name": "nlohmann_json-abi",
+      "build": "h0f90c79_1",
+      "version": "3.12.0",
+      "subdir": "noarch",
+      "channel": "conda-forge",
+      "hash": {
+        "md5": "59659d0213082bc13be8500bab80c002",
+        "sha256": "2a909594ca78843258e4bda36e43d165cda844743329838a29402823c8f20dec"
+      },
+      "size": 4335
+    },
+    "xeus-5.2.8-h0b0027f_0.tar.bz2": {
+      "name": "xeus",
+      "build": "h0b0027f_0",
+      "version": "5.2.8",
+      "subdir": "emscripten-wasm32",
+      "channel": "emscripten-forge-4x",
+      "hash": {
+        "md5": "1d85fcf2e2c73e83a288cd8ae26a8c4d",
+        "sha256": "3991c94a8818b9c86f0d7ed3827a88dc886590582e03c2bb06cd64166d868339"
+      },
+      "size": 299268
+    },
+    "python_abi-3.13-8_cp313.conda": {
+      "name": "python_abi",
+      "build": "8_cp313",
+      "version": "3.13",
+      "subdir": "noarch",
+      "channel": "conda-forge",
+      "hash": {
+        "md5": "94305520c52a4aa3f6c2b1ff6008d9f8",
+        "sha256": "210bffe7b121e651419cb196a2a63687b087497595c9be9d20ebe97dd06060a7"
+      },
+      "size": 7002
+    },
+    "python-3.13.1-h_2efca29_11_cp313.tar.bz2": {
+      "name": "python",
+      "build": "h_2efca29_11_cp313",
+      "version": "3.13.1",
+      "subdir": "emscripten-wasm32",
+      "channel": "emscripten-forge-4x",
+      "hash": {
+        "md5": "6541a249de9b863533e745bdeeb6d346",
+        "sha256": "87a2f18dd094535772fba34526a2398902e0e9e385435f135932a9e563f96acb"
+      },
+      "size": 5731072
+    }
+  },
+  "pipPackages": {},
+  "id": "7931398050494899"
+}
