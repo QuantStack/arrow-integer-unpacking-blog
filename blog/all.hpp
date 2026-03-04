@@ -25,9 +25,9 @@
 #include "arrow/util/bpacking_internal.h"
 #include "arrow/util/bpacking_simd_kernel_internal.h"
 
-#include "components.hpp"
-#include "ui.hpp"
-#include "utils.hpp"
+#include "blog/components.hpp"
+#include "blog/ui.hpp"
+#include "blog/utils.hpp"
 
 // Since we are not linking with libarrow, we need to add all the C++ code
 // that is indirectly depended upon by header inclusion
