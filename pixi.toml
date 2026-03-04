@@ -85,14 +85,14 @@ jupyterlab = ">=4.5"
 specta = "*"
 # Kernel
 xeus-cpp = ">=0.8"
-cppinterop = "<1.8.0"
+clang = "21.*"
+clangxx = "*"
+# cppinterop = "<1.8.0"
 # LSP
 jupyterlab-lsp = "*"
-clang = "*"
-clangxx = "*"
 clang-tools = "*"
 # Libs
-xwidgets = "*"
+xwidgets = "0.29.3"
 jupyterlab_widgets = "*"
 fmt = "*"
 polars = "*"
