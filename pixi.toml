@@ -91,14 +91,18 @@ specta = "*"
 xeus-cpp = ">=0.8"
 clang = "21.*"
 clangxx = "*"
-# cppinterop = "<1.8.0"
 # LSP
 jupyterlab-lsp = "*"
 clang-tools = "*"
 # Libs
-xwidgets = "0.29.3"
+xwidgets = "==0.29.3"
 jupyterlab_widgets = "*"
 fmt = "*"
 polars = "*"
 seaborn = "*"
+numpy = "*"
 pyarrow = "*"
+ipywidgets = "*"
+
+[feature.jupyter.tasks]
+jupyter = "jupyter"
