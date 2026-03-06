@@ -3,8 +3,17 @@ channels:
   - emscripten-forge-4x
   - conda-forge
 dependencies:
+  # For the C++ notebook
   - xeus-cpp >=0.8
   - xsimd =14.*
   - xwidgets=0.29.3
   - xproperty=0.12.1
   - jupyterlab_widgets
+  # For the Python notebook
+  - xeus-python
+  - polars
+  - seaborn
+  - matplotlib
+  - numpy
+  - pyarrow
+  - ipywidgets
