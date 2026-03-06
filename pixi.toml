@@ -23,9 +23,14 @@ gtest = "*"
 benchmark = "*"
 cmake-format = "*"
 mambajs = "*"
+ruff = "*"
 
 [feature.dev.tasks.nb-lock]
 cmd = "mambajs create-lock .nblink/environment.yml .nblink/nblink-lock.json"
+
+[feature.dev.tasks.fmt-ruff]
+cmd = "ruff format"
+description = "Format Python files with ruff."
 
 [feature.dev.tasks.configure]
 cmd = """
