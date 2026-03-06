@@ -72,7 +72,7 @@ def make_packed_width_one_pair_wt(unpacked_type_wt: MultiSelect, df: pl.DataFram
     return packed_width_one_wt, packed_width_one_slider_wt
 
 
-def build_palette(arch_funcs: dict[str, list[str]]) -> dict[str, RGB]:
+def build_palette(arch_funcs: dict[str, list[str]]) -> dict[str, tuple[float, float, float]]:
     all_funcs: set[str] = set()
     for fs in arch_funcs.values():
         all_funcs.update(fs)
