@@ -15,7 +15,10 @@
 // specific language governing permissions and limitations
 // under the License.
 
-#if defined(ARROW_HAVE_NEON)
+// Hardcode the name to use in the notebook while being platform independent
+#ifdef __CLANG_REPL__
+#  define UNPACK_PLATFORM unpack_128
+#elif defined(ARROW_HAVE_NEON)
 #  define UNPACK_PLATFORM unpack_neon
 #elif defined(ARROW_HAVE_SSE4_2)
 #  define UNPACK_PLATFORM unpack_sse4_2

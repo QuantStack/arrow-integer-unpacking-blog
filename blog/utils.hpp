@@ -9,6 +9,8 @@
 #include <string_view>
 #include <vector>
 
+#include "arrow/util/bit_util.h"
+
 template <std::unsigned_integral UintType = std::size_t, std::ranges::input_range Range>
 auto MaxWidthBits(Range&& in) -> std::size_t {
   auto bit_width = [](auto x) { return std::bit_width(x); };
@@ -88,16 +90,17 @@ constexpr auto UintMax(Uint u) -> std::uint64_t {
   return kOnes >> (8 * sizeof(std::uint64_t) - static_cast<std::uint8_t>(u));
 }
 
+template <typename T>
 inline auto RandomValues(std::size_t n, std::size_t packed_bit_size,
-                         std::mt19937::result_type seed = 33)
-    -> std::vector<std::uint64_t> {
-  std::mt19937 gen(seed);
+                         std::minstd_rand::result_type seed = 33) -> std::vector<T> {
+  std::minstd_rand gen(seed);
 
   // Calculate max value that fits in packed_bit_size bits
-  const auto max_value = (std::uint64_t{1} << packed_bit_size) - std::uint64_t{1};
-  std::uniform_int_distribution<std::uint64_t> dist(0, max_value);
+  const auto max_value = static_cast<T>(
+      arrow::bit_util::BytesForBits(static_cast<int64_t>(packed_bit_size)));
+  std::uniform_int_distribution<T> dist(0, max_value);
 
-  auto result = std::vector<std::uint64_t>();
+  auto result = std::vector<T>();
   result.reserve(n);
   for (std::size_t i = 0; i < n; ++i) {
     result.push_back(dist(gen));
