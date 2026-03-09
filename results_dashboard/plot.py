@@ -76,6 +76,7 @@ def relplot(
     style: str | None = None,
     dashes: dict[str, DashSeq] | None = None,
     col: str | None = None,
+    col_order: list[str] | None = None,
     aspect: float = 1.0,
     height: float = 5.0,
     facet_kws: dict[str, object] | None = None,
@@ -176,7 +177,11 @@ def relplot(
     if col is not None:
         if col not in data.columns:
             raise ValueError(f"col={col!r} is not a column in the DataFrame")
-        col_levels = _unique_sorted(data, col)
+        if col_order is not None:
+            available = set(_unique_sorted(data, col))
+            col_levels = [lv for lv in col_order if lv in available]
+        else:
+            col_levels = _unique_sorted(data, col)
         n_facets = len(col_levels)
     else:
         col_levels = [None]

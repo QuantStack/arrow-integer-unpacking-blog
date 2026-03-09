@@ -37,7 +37,10 @@ def make_arch_funcs(df: pl.DataFrame) -> dict[str, list[str]]:
 
 def make_func_wt(arch_funcs: dict[str, list[str]]) -> GroupedMultiSelect:
     return GroupedMultiSelect(
-        arch_funcs, default_filter=lambda cat, s: s.endswith("Old") or s.endswith("New")
+        arch_funcs,
+        default_filter=lambda cat, s: (
+            s.endswith("Old") or s.endswith("New") or s.endswith("LittleIntPacker")
+        ),
     )
 
 
@@ -72,7 +75,9 @@ def make_packed_width_one_pair_wt(unpacked_type_wt: MultiSelect, df: pl.DataFram
     return packed_width_one_wt, packed_width_one_slider_wt
 
 
-def build_palette(arch_funcs: dict[str, list[str]]) -> dict[str, tuple[float, float, float]]:
+def build_palette(
+    arch_funcs: dict[str, list[str]],
+) -> dict[str, tuple[float, float, float]]:
     all_funcs: set[str] = set()
     for fs in arch_funcs.values():
         all_funcs.update(fs)
@@ -80,6 +85,7 @@ def build_palette(arch_funcs: dict[str, list[str]]) -> dict[str, tuple[float, fl
     n = len(all_funcs)
     cmap = matplotlib.colormaps[f"tab{10 if n <= 10 else 20}"]
     colors = [cmap(i)[:3] for i in range(n)]
+    all_funcs = sorted(set(all_funcs) - {"LittleIntPacker"}) + ["LittleIntPacker"]
 
     return dict(zip(sorted(all_funcs), colors))
 
@@ -116,12 +122,14 @@ def raw_plot(
         .filter(
             (x_axis[0] <= pl.col("num_values")) & (pl.col("num_values") <= x_axis[1])
         )
+        .sort(by=["unpacked_type", "func", "arch"])
         .collect()
     )
     all_funcs = df["func"].unique()  # Quick because categorical
     splits = {
         "hue": "func" if len(selected_funcs) > 1 else None,
         "col": "unpacked_type" if len(unpacked_types) > 1 else None,
+        "col_order": ["Bool", "Uint8", "Uint16", "Uint32", "Uint64"],
         "style": "arch",
     }
     with out:
@@ -205,12 +213,14 @@ def plot_speed(
         df.lazy()
         .filter(pl.col("unpacked_type").is_in(unpacked_types))
         .filter(arch_func_filter(arch_funcs))
+        .sort(by=["unpacked_type", "func", "arch"])
         .collect()
     )
     all_funcs = df["func"].unique()  # Quick because categorical
     splits = {
         "hue": "func" if len(selected_funcs) > 1 else None,
         "col": "unpacked_type" if len(unpacked_types) > 1 else None,
+        "col_order": ["Bool", "Uint8", "Uint16", "Uint32", "Uint64"],
         "style": "arch",
     }
     with out:
