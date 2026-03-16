@@ -96,8 +96,8 @@ inline auto RandomValues(std::size_t n, std::size_t packed_bit_size,
   std::minstd_rand gen(seed);
 
   // Calculate max value that fits in packed_bit_size bits
-  const auto max_value = static_cast<T>(
-      arrow::bit_util::BytesForBits(static_cast<int64_t>(packed_bit_size)));
+  const auto max_value = arrow::bit_util::LeastSignificantBitMask<T, true>(
+      static_cast<int64_t>(packed_bit_size));
   std::uniform_int_distribution<T> dist(0, max_value);
 
   auto result = std::vector<T>();
