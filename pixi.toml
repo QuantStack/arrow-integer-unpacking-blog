@@ -93,14 +93,14 @@ LIBRARY_PATH="$CONDA_PREFIX/lib"
 jupyterlab = ">=4.5"
 specta = "*"
 # Kernel
-xeus-cpp = ">=0.8"
+xeus-cpp = "0.9.*"
 clang = "21.*"
 clangxx = "*"
 # LSP
 jupyterlab-lsp = "*"
 clang-tools = "*"
 # Libs
-xwidgets = "==0.29.3"
+xwidgets = "0.30.*"
 jupyterlab_widgets = "*"
 fmt = "*"
 polars = "*"
