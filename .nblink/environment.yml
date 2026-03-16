@@ -4,10 +4,10 @@ channels:
   - conda-forge
 dependencies:
   # For the C++ notebook
-  - xeus-cpp >=0.8
+  - xeus-cpp >=0.9
   - xsimd =14.*
-  - xwidgets=0.29.3
-  - xproperty=0.12.1
+  - xwidgets
+  - xproperty
   - jupyterlab_widgets
   # For the Python notebook
   - xeus-python
