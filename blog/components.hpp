@@ -49,7 +49,7 @@ class IntegerToolbar {
   void on_change(Func func) {
     auto callback = [this, func = std::move(func)](const auto& w) {
       auto g = m_output.guard();
-      xcpp::clear_output();
+      xcpp::clear_output(true);
       const auto uint = ParseUint(m_uint.value());
       func(w.value(), uint);
       std::cout << std::flush;
@@ -144,7 +144,7 @@ class SequenceToolbar {
   void on_change(Func func) {
     auto callback = [this, func = std::move(func)](const auto& w) {
       auto g = m_output.guard();
-      xcpp::clear_output();
+      xcpp::clear_output(true);
       func(std::as_const(*this));
       std::cout << std::flush;
     };
